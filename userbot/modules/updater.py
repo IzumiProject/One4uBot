@@ -95,11 +95,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         except GitCommandError as error:
             await event.edit(f"{txt}\n`Here is the error log:\n{error}`")
             return repo.__del__()
-        await event.edit("`Successfully Updated!\n" "Restarting, please wait...`")
+        await event.edit("**Successfully Updated!**\n" "`Restarting, please wait...`")
 
         if BOTLOG:
             await event.client.send_message(
-                BOTLOG_CHATID, "#UPDATE \n" "Your One4uBot was successfully updated"
+                BOTLOG_CHATID, "#UPDATE \n" "`Your` **USERBOT** `was` **successfully updated**"
             )
 
     else:
@@ -114,12 +114,12 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     await event.edit(
-        "`Successfully Updated!\n" "Bot is restarting... Wait for a second!`"
+        "**Successfully Updated!**\n" "`Bot is restarting... Wait for a second!`"
     )
 
     if BOTLOG:
         await event.client.send_message(
-            BOTLOG_CHATID, "#UPDATE \n" "Your One4uBot was successfully updated"
+            BOTLOG_CHATID, "#UPDATE \n" "`Your` **USERBOT** `was` **successfully updated**"
         )
 
     # Spin a new instance of bot
@@ -128,9 +128,9 @@ async def update(event, repo, ups_rem, ac_br):
     return
 
 
-@register(outgoing=True, pattern=r"^.update(?: |$)(now|deploy)?")
+@register(outgoing=True, pattern=r"^.up(?: |$)(now|dep)?")
 async def upstream(event):
-    "For .update command, check if the bot is up to date, update if specified"
+    "For .up command, check if the bot is up to date, update if specified"
     await event.edit("`Checking for updates, please wait....`")
     conf = event.pattern_match.group(1)
     off_repo = UPSTREAM_REPO_URL
@@ -149,7 +149,7 @@ async def upstream(event):
         if conf is None:
             return await event.edit(
                 f"`Unfortunately, the directory {error} does not seem to be a git repository."
-                "\nBut we can fix that by force updating the userbot using .update now.`"
+                "\nBut we can fix that by force updating the userbot using .up now.`"
             )
         repo = Repo.init()
         origin = repo.create_remote("upstream", off_repo)
@@ -181,7 +181,7 @@ async def upstream(event):
 
     if changelog == "" and force_update is False:
         await event.edit(
-            f"\n`{UPDATER_ALIAS} is`  **up-to-date**  `with`  **{UPSTREAM_REPO_BRANCH}**\n"
+            f"\n**{UPDATER_ALIAS}** `is`  **up-to-date**  `with`  **{UPSTREAM_REPO_BRANCH}**\n"
         )
         return repo.__del__()
 
@@ -202,28 +202,28 @@ async def upstream(event):
             remove("output.txt")
         else:
             await event.edit(changelog_str)
-        return await event.respond('`do ".update now/deploy" to update`')
+        return await event.respond('`do ".up now/dep" to update`')
 
     if force_update:
         await event.edit(
             "`Force-Syncing to latest stable userbot code, please wait...`"
         )
     else:
-        await event.edit("`Updating One4uBot, please wait....`")
+        await event.edit("`Updating` **USERBOT,** `please wait....`")
     if conf == "now":
         await update(event, repo, ups_rem, ac_br)
-    elif conf == "deploy":
+    elif conf == "dep":
         await deploy(event, repo, ups_rem, ac_br, txt)
     return
 
 
 CMD_HELP.update(
     {
-        "update": ".update"
+        "update": ".up"
         "\nUsage: Checks if the main userbot repository has any updates and shows a changelog if so."
-        "\n\n.update now"
+        "\n\n.up now"
         "\nUsage: Update your userbot, if there are any updates in your userbot repository."
-        "\n\n.update deploy"
+        "\n\n.update dep"
         "\nUsage: Deploy your userbot at heroku, if there are any updates in your userbot repository."
     }
 )
