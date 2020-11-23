@@ -67,9 +67,9 @@ async def neardc(event):
     )
 
 
-@register(outgoing=True, pattern="^.ping$")
+@register(outgoing=True, pattern="^.p$")
 async def pingme(pong):
-    """ For .ping command, ping the userbot from any chat.  """
+    """ For .p command, ping the userbot from any chat.  """
     start = datetime.now()
     await pong.edit("`Pong!`")
     end = datetime.now()
@@ -91,7 +91,7 @@ CMD_HELP.update(
 )
 CMD_HELP.update(
     {
-        "ping": ".ping\
+        "ping": ".p\
     \nUsage: Shows how long it takes to ping your bot."
     }
 )
