@@ -479,7 +479,7 @@ async def download_gdrive(gdrive, service, uri):
                         round(percentage, 2),
                     )
                     current_message = (
-                        "**[FILE - DOWNLOAD]*"\n\n"
+                        "**[FILE - DOWNLOAD]**\n\n"
                         f"**{file_name}**\n"
                         f"**Status**\n{prog_str}\n"
                         f"`{humanbytes(downloaded)} of {humanbytes(file_size)}"
