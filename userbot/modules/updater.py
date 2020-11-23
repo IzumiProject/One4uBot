@@ -99,7 +99,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
 
         if BOTLOG:
             await event.client.send_message(
-                BOTLOG_CHATID, "#UPDATE \n" "`Your` **USERBOT** `was` **successfully updated**"
+                BOTLOG_CHATID, "`Your` **USERBOT** `was` **successfully updated**"
             )
 
     else:
@@ -119,7 +119,7 @@ async def update(event, repo, ups_rem, ac_br):
 
     if BOTLOG:
         await event.client.send_message(
-            BOTLOG_CHATID, "#UPDATE \n" "`Your` **USERBOT** `was` **successfully updated**"
+            BOTLOG_CHATID, "`Your` **USERBOT** `was` **successfully updated**"
         )
 
     # Spin a new instance of bot
