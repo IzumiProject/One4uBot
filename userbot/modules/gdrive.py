@@ -287,8 +287,8 @@ async def download(gdrive, service, uri=None):
             else:
                 reply += (
                     f"**{status}**\n\n"
-                    f"**Name**   : `{file_name}`\n"
-                    f"**Size**   : `{humanbytes(result[0])}`\n"
+                    f"**Name**   : {file_name}\n"
+                    f"**Size**   : {humanbytes(result[0])}\n"
                     f"**Link**   : [{file_name}]({result[1]})\n"
                     "**Status**  : **OK** - `Successfully uploaded.`\n\n"
                 )
@@ -495,9 +495,9 @@ async def download_gdrive(gdrive, service, uri):
                         display_message = current_message
     await gdrive.edit(
         "**[FILE - DOWNLOAD]**\n\n"
-        f"**Name**   : `{file_name}`\n"
-        f"**Size**   : `{humanbytes(file_size)}`\n"
-        f"**Path**   : `{file_path}`\n"
+        f"**Name**   : {file_name}\n"
+        f"**Size**   : {humanbytes(file_size)}\n"
+        f"**Path**   : {file_path}\n"
         "**Status**  : **OK** - `Successfully downloaded.`"
     )
     msg = await gdrive.respond("`Answer the question in your BOTLOG group`")
@@ -526,8 +526,8 @@ async def download_gdrive(gdrive, service, uri):
         else:
             reply += (
                 "**[FILE - UPLOAD]**\n\n"
-                f"**Name**   : `{file_name}`\n"
-                f"**Size**   : `{humanbytes(result[0])}`\n"
+                f"**Name**   : {file_name}\n"
+                f"**Size**   : {humanbytes(result[0])}\n"
                 f"**Link**   : [{file_name}]({result[1]})\n"
                 "**Status**  : **OK**\n\n"
             )
@@ -940,7 +940,7 @@ async def google_drive_managers(gdrive):
             else:
                 msg += f"**URL**   : [Open]({webViewLink})\n\n"
             if description:
-                msg += f"**About** :\n`{description}`\n\n"
+                msg += f"**About** : \n`{description}`\n\n"
             reply += msg
         page_token = result.get("nextPageToken", None)
     await gdrive.edit(reply)
@@ -1008,7 +1008,7 @@ async def google_drive(gdrive):
             await gdrive.edit(
                 "**[FOLDER - UPLOAD]**\n\n"
                 f"**{folder_name}**\n"
-                "**Status** : **BAD**\n"
+                "**Status**  : **BAD**\n"
                 f"**Reason** : {str(e)}"
             )
             await reset_parentId()
@@ -1130,8 +1130,8 @@ async def google_drive(gdrive):
     if result:
         await gdrive.respond(
             "**[FILE - UPLOAD]**\n\n"
-            f"**Name**   : `{file_name}`\n"
-            f"**Size**   : `{humanbytes(result[0])}`\n"
+            f"**Name**   : {file_name}\n"
+            f"**Size**   : {humanbytes(result[0])}\n"
             f"**Link**   : [{file_name}]({result[1]})\n"
             "**Status**  : **OK** - `Successfully uploaded.`\n",
             link_preview=False,
